@@ -42,7 +42,7 @@ for g in range(generacionTotal):
             modelElite.append(model)
             aptitudes.append(prediccion)
             print(prediccion)
-
+model = 0
 mejor = -999999
 mejorIndice = 0
 for i in range(len(aptitudes)):
@@ -50,7 +50,12 @@ for i in range(len(aptitudes)):
         mejor = aptitudes[i]
         mejorIndice = i
 
-model = modelElite[mejorIndice]
+if mejor == -999999:
+    mejorIndice=0
+    model = cNet(lr=learning_rate)
+    model = model.to(device)
+else:
+    model = modelElite[mejorIndice]
 '''
 for nombre, modulo in model.named_modules():
     if isinstance(modulo, nn.Linear):
